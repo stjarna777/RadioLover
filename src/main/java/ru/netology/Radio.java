@@ -43,7 +43,6 @@ public class Radio {
         currentRadioStation = 0;
     }
 
-    // Громкость
     public int getCurrentVolume() {
         return currentVolume;
     }
