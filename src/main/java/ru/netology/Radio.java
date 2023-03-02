@@ -1,80 +1,127 @@
 package ru.netology;
 
 public class Radio {
-    private int currentRadioStation;
-    private int currentVolume;
+    private int maxRadioStation = 9;
+    private int minRadioStation = 0;
+    private int RadioStation = minRadioStation;
+    private int sizeRadioStation = 10;
+    private int maxVolume = 100;
+    private int minVolume = 0;
+    private int Volume = minVolume;
+
+    public Radio() {
+    }
+
+    public Radio(int size) {
+        this.sizeRadioStation = size - 1;
+        maxRadioStation = minRadioStation + sizeRadioStation;
+    }
+
+    // Радиостанция
+    public int getMaxRadioStation() {
+        return maxRadioStation;
+    }
+
+    public void setMaxRadioStation(int maxRadioStation) {
+        this.maxRadioStation = maxRadioStation;
+    }
+
+    public int getMinRadioStation() {
+        return minRadioStation;
+    }
+
+    public void setMinRadioStation(int minRadioStation) {
+        this.minRadioStation = minRadioStation;
+    }
 
     public int getCurrentRadioStation() {
-        return currentRadioStation;
+        return RadioStation;
     }
 
     public void setCurrentRadioStation(int newCurrentRadioStation) {
-
-        if (newCurrentRadioStation < 0) {
+        if (newCurrentRadioStation > maxRadioStation) {
             return;
         }
-        if (newCurrentRadioStation > 9) {
+        if (newCurrentRadioStation < minRadioStation) {
             return;
         }
-        currentRadioStation = newCurrentRadioStation;
+        this.RadioStation = newCurrentRadioStation;
     }
 
-    public void setToMaxRadioStation() {
-        currentRadioStation = 9;
-    }
 
-    public void nextRadioStation() {
-        if (currentRadioStation < 9) {
-            currentRadioStation = currentRadioStation + 1;
+    public void nextCurrentRadioStation() {
+        int currentRadioStation = this.RadioStation;
+        if (currentRadioStation >= maxRadioStation) {
+            this.RadioStation = minRadioStation;
         } else {
-            currentRadioStation = 0;
+            this.RadioStation = currentRadioStation + 1;
         }
     }
 
-    public void prevRadioStation() {
-        if (currentRadioStation > 0) {
-            currentRadioStation = currentRadioStation - 1;
+    public void prevCurrentRadioStation() {
+        int currentRadioStation = this.RadioStation;
+        if (currentRadioStation <= minRadioStation) {
+            this.RadioStation = maxRadioStation;
         } else {
-            currentRadioStation = 0;
+            this.RadioStation = currentRadioStation - 1;
         }
     }
 
-    public void setToMinRadioStation() {
-        currentRadioStation = 0;
+    public void remoteCurrentRadioStation(int currentRadioStation) {
+        if (currentRadioStation > maxRadioStation) {
+            this.RadioStation = maxRadioStation;
+        } else if (currentRadioStation < minRadioStation) {
+            this.RadioStation = minRadioStation;
+        } else {
+            this.RadioStation = currentRadioStation;
+        }
+    }
+
+    public int getMaxVolume() {
+        return maxVolume;
+    }
+
+    public void setMaxVolume(int maxVolume) {
+        this.maxVolume = maxVolume;
+    }
+
+    public int getMinVolume() {
+        return minVolume;
+    }
+
+    public void setMinVolume(int minVolume) {
+        this.minVolume = minVolume;
     }
 
     public int getCurrentVolume() {
-        return currentVolume;
+        return Volume;
     }
 
-    public void setCurrentVolume(int newCurrentVolume) {
-
-        if (newCurrentVolume < 0) {
+    public void setCurrentVolume(int currentVolume) {
+        if (currentVolume > maxVolume) {
             return;
         }
-        if (newCurrentVolume > 10) {
+        if (currentVolume < minVolume) {
             return;
         }
-        currentVolume = newCurrentVolume;
+        this.Volume = currentVolume;
     }
 
-    public void setToMaxVolume() {
-        currentVolume = 10;
-    }
-
-    public void increaseToNextVolume() {
-        if (currentVolume < 10) {
-            currentVolume = currentVolume + 1;
+    public void nextCurrentVolume() {
+        int currentVolume = this.Volume;
+        if (currentVolume >= maxVolume) {
+            this.Volume = maxVolume;
+        } else {
+            this.Volume = currentVolume + 1;
         }
     }
 
-    public void setToMinVolume() {
-        currentVolume = 0;
-    }
-
-    public void increaseToPrevVolume() {
-        if (currentVolume > 0) {
-            currentVolume = currentVolume - 1;
+    public void prevCurrentVolume() {
+        int currentVolume = this.Volume;
+        if (currentVolume <= minVolume) {
+            this.Volume = minVolume;
+        } else {
+            this.Volume = currentVolume - 1;
         }
     }
 }
